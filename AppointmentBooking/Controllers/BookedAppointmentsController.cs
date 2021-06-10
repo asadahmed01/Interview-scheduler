@@ -82,10 +82,7 @@ namespace AppointmentBooking.Controllers
                 return RedirectToAction(nameof(Index));
             }
 
-            //var id = Request.Form["who"].ToString();
-            //ViewData["who"] = new SelectList(id, "ID", "ID", bookedAppointment.InterviewerID);
-
-            //var selectedValue = bookedAppointment.InterviewerID;
+            
             ViewData["InterviewerID"] = new SelectList(_context.Interviewer, "ID", "ID", bookedAppointment.InterviewerID);
 
             return View(bookedAppointment);
