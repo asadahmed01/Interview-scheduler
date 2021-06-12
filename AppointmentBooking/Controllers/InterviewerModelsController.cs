@@ -23,7 +23,7 @@ namespace AppointmentBooking.Controllers
         {
             _context = context;
         }
-        [Authorize(Roles = "Admin")]
+        [Authorize]
         // GET: InterviewerModels
         public async Task<IActionResult> Index()
         {
