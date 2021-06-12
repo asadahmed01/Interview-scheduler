@@ -439,3 +439,4 @@ C:\Users\asada\Desktop\AppointmentBooking\AppointmentBooking\obj\Debug\net5.0\Ra
 C:\Users\asada\Desktop\AppointmentBooking\AppointmentBooking\obj\Debug\net5.0\Razor\Views\BookedAppointments\Index.cshtml.g.cs
 C:\Users\asada\Desktop\AppointmentBooking\AppointmentBooking\obj\Debug\net5.0\AppointmentBooking.csproj.AssemblyReference.cache
 C:\Users\asada\Desktop\AppointmentBooking\AppointmentBooking\obj\Debug\net5.0\Razor\Views\InterviewerModels\Login.cshtml.g.cs
+C:\Users\asada\Desktop\AppointmentBooking\AppointmentBooking\obj\Debug\net5.0\Razor\Views\InterviewerModels\Denied.cshtml.g.cs

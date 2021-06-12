@@ -23,7 +23,7 @@ namespace AppointmentBooking.Controllers
         {
             _context = context;
         }
-        [Authorize]
+        [Authorize(Roles = "Admin")]
         // GET: InterviewerModels
         public async Task<IActionResult> Index()
         {
@@ -47,6 +47,8 @@ namespace AppointmentBooking.Controllers
                 var claims = new List<Claim>();
                 claims.Add(new Claim("username", username));
                 claims.Add(new Claim(ClaimTypes.NameIdentifier, username));
+                claims.Add(new Claim(ClaimTypes.Name, username));
+               
                 var claimsIdentity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
                 var claimsPrincipal = new ClaimsPrincipal(claimsIdentity);
                 await HttpContext.SignInAsync(claimsPrincipal);
@@ -55,6 +57,22 @@ namespace AppointmentBooking.Controllers
             TempData["Error"] = "Error. Username or Password is incorrect.";
             return View("login");
         }
+
+        //Denied Page
+        [HttpGet("denied")]
+        public IActionResult Denied()
+        {
+            return View();
+        }
+
+        //logout user
+        [Authorize]
+        public async Task<IActionResult> Logout ()
+        {
+            await HttpContext.SignOutAsync();
+            return Redirect("/");
+        }
+
         // GET: InterviewerModels/Details/5
         public async Task<IActionResult> Details(int? id)
         {

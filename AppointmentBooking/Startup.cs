@@ -12,6 +12,7 @@ using Microsoft.Extensions.Hosting;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Claims;
 using System.Threading.Tasks;
 
 namespace AppointmentBooking
@@ -24,6 +25,7 @@ namespace AppointmentBooking
         }
 
         public IConfiguration Configuration { get; }
+       
 
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
@@ -37,6 +39,25 @@ namespace AppointmentBooking
             services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
                 .AddCookie(options => {
                     options.LoginPath = "/login";
+                    options.AccessDeniedPath = "/denied";
+                    options.Events = new CookieAuthenticationEvents()
+                    {
+                        OnSigningIn = async context =>
+                        {
+                            var principal = context.Principal;
+                            //check if user has claims
+                            if (principal.HasClaim(c => c.Type == ClaimTypes.NameIdentifier))
+                            {
+                                if (principal.Claims.FirstOrDefault(c => c.Type == ClaimTypes.NameIdentifier).Value == "admin")
+                                {
+                                    var claimsIdentity = principal.Identity as ClaimsIdentity;
+                                    claimsIdentity.AddClaim(new Claim(ClaimTypes.Role, "Admin"));
+                                }
+                            }
+                            await Task.CompletedTask;
+                        }
+
+                    };
                 });
         }
 
