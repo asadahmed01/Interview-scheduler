@@ -8,6 +8,9 @@ using Microsoft.EntityFrameworkCore;
 using AppointmentBooking.Data;
 using AppointmentBooking.Models;
 using Microsoft.AspNetCore.Authorization;
+using System.Security.Claims;
+using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Authentication.Cookies;
 
 namespace AppointmentBooking.Controllers
 {
@@ -20,7 +23,7 @@ namespace AppointmentBooking.Controllers
         {
             _context = context;
         }
-        [Authorize(Roles = "Admin")]
+        [Authorize]
         // GET: InterviewerModels
         public async Task<IActionResult> Index()
         {
@@ -28,9 +31,29 @@ namespace AppointmentBooking.Controllers
         }
 
         [HttpGet("login")]
-        public IActionResult Login()
+        public IActionResult Login(string returnUrl)
         {
+            ViewData["ReturnUrl"] = returnUrl;
             return View();
+        }
+
+
+        [HttpPost("login")]
+        public async Task<IActionResult> ValidateAdmin(string username, string password, string returnUrl)
+        {
+            ViewData["ReturnUrl"] = returnUrl;
+            if(username =="admin" && password == "pizza")
+            {
+                var claims = new List<Claim>();
+                claims.Add(new Claim("username", username));
+                claims.Add(new Claim(ClaimTypes.NameIdentifier, username));
+                var claimsIdentity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
+                var claimsPrincipal = new ClaimsPrincipal(claimsIdentity);
+                await HttpContext.SignInAsync(claimsPrincipal);
+                return Redirect(returnUrl);
+            }
+            TempData["Error"] = "Error. Username or Password is incorrect.";
+            return View("login");
         }
         // GET: InterviewerModels/Details/5
         public async Task<IActionResult> Details(int? id)
@@ -51,6 +74,7 @@ namespace AppointmentBooking.Controllers
         }
 
         // GET: InterviewerModels/Create
+        [Authorize]
         public IActionResult Create()
         {
             return View();
