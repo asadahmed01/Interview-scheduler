@@ -7,9 +7,11 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using AppointmentBooking.Data;
 using AppointmentBooking.Models;
+using Microsoft.AspNetCore.Authorization;
 
 namespace AppointmentBooking.Controllers
 {
+    
     public class InterviewerModelsController : Controller
     {
         private readonly AppointmentDbContext _context;
@@ -18,13 +20,18 @@ namespace AppointmentBooking.Controllers
         {
             _context = context;
         }
-
+        [Authorize(Roles = "Admin")]
         // GET: InterviewerModels
         public async Task<IActionResult> Index()
         {
             return View(await _context.Interviewer.ToListAsync());
         }
 
+        [HttpGet("login")]
+        public IActionResult Login()
+        {
+            return View();
+        }
         // GET: InterviewerModels/Details/5
         public async Task<IActionResult> Details(int? id)
         {

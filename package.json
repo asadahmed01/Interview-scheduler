@@ -1,0 +1,28 @@
+{
+  "name": "AppointmentBooking",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/asadahmed01/Interview-scheduler.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/asadahmed01/Interview-scheduler/issues"
+  },
+  "homepage": "https://github.com/asadahmed01/Interview-scheduler#readme",
+  "devDependencies": {
+    "@tailwindcss/postcss7-compat": "^2.1.4",
+    "autoprefixer": "^9.8.6",
+    "postcss": "^7.0.36",
+    "tailwindcss": "npm:@tailwindcss/postcss7-compat@^2.1.4"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "css:build": "npx tailwind build ./AppointmentBooking/wwwroot/css/site.css -o ./AppointmentBooking/wwwroot/css/output.css"
+  }
+}
