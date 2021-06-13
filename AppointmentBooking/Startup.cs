@@ -37,38 +37,30 @@ namespace AppointmentBooking
             //services.AddDatabaseDeveloperPageExceptionFilter();
 
             services.AddControllersWithViews();
-            services.AddAuthentication(options => {
+            services.AddAuthentication(options =>
+            {
                 options.DefaultScheme = CookieAuthenticationDefaults.AuthenticationScheme;
-                options.DefaultChallengeScheme = GoogleDefaults.AuthenticationScheme;
+                options.DefaultChallengeScheme = "GoogleOpenID";
             })
                 .AddCookie(options =>
                 {
                     options.LoginPath = "/login";
                     options.AccessDeniedPath = "/denied";
-                    //options.Events = new CookieAuthenticationEvents()
-                    //{
-                    //    OnSigningIn = async context =>
-                    //    {
-                    //        var principal = context.Principal;
-                    //        //check if user has claims
-                    //        if (principal.HasClaim(c => c.Type == ClaimTypes.NameIdentifier))
-                    //        {
-                    //            if (principal.Claims.FirstOrDefault(c => c.Type == ClaimTypes.NameIdentifier).Value == "admin")
-                    //            {
-                    //                var claimsIdentity = principal.Identity as ClaimsIdentity;
-                    //                claimsIdentity.AddClaim(new Claim(ClaimTypes.Role, "Admin"));
-                    //            }
-                    //        }
-                    //        await Task.CompletedTask;
-                    //    }
 
-                    //};
-                }).AddGoogle(options => {
+                }).AddOpenIdConnect("GoogleOpenID", options =>
+                {
+                    options.Authority = "https://accounts.google.com";
                     options.ClientId = "562521670675-92vule9iisl7p2aau6murjf9jrcnm9mn.apps.googleusercontent.com";
                     options.ClientSecret = "WoDy4M33--ERUh2xgM6f666L";
                     options.CallbackPath = "/auth";
-                    options.AuthorizationEndpoint += "?prompt=consent";
                 });
+
+                //.AddGoogle(options => {
+                //    options.ClientId = "562521670675-92vule9iisl7p2aau6murjf9jrcnm9mn.apps.googleusercontent.com";
+                //    options.ClientSecret = "WoDy4M33--ERUh2xgM6f666L";
+                //    options.CallbackPath = "/auth";
+                //    options.AuthorizationEndpoint += "?prompt=consent";
+                //});
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

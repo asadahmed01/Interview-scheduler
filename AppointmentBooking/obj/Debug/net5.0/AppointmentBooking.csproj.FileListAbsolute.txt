@@ -441,3 +441,4 @@ C:\Users\asada\Desktop\AppointmentBooking\AppointmentBooking\obj\Debug\net5.0\Ap
 C:\Users\asada\Desktop\AppointmentBooking\AppointmentBooking\obj\Debug\net5.0\Razor\Views\InterviewerModels\Login.cshtml.g.cs
 C:\Users\asada\Desktop\AppointmentBooking\AppointmentBooking\obj\Debug\net5.0\Razor\Views\InterviewerModels\Denied.cshtml.g.cs
 C:\Users\asada\Desktop\AppointmentBooking\AppointmentBooking\bin\Debug\net5.0\Microsoft.AspNetCore.Authentication.Google.dll
+C:\Users\asada\Desktop\AppointmentBooking\AppointmentBooking\bin\Debug\net5.0\Microsoft.AspNetCore.Authentication.OpenIdConnect.dll
