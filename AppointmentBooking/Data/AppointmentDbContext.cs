@@ -25,5 +25,7 @@ namespace AppointmentBooking.Data
             modelBuilder.Entity<BookedAppointment>().ToTable("Appointment");
         }
 
+        public DbSet<AppointmentBooking.Models.AvailableTimes> AvailableTimes { get; set; }
+
     }
 }

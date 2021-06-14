@@ -1,4 +1,4 @@
-﻿@model AppointmentBooking.Models.InterviewerModel
+﻿@model AppointmentBooking.Models.AvailableTimes
 
 @{
     ViewData["Title"] = "Create";
@@ -6,21 +6,20 @@
 
 <h1>Create</h1>
 
-<h4>InterviewerModel</h4>
+<h4>AvailableTimes</h4>
 <hr />
 <div class="row">
     <div class="col-md-4">
         <form asp-action="Create">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
-                <label asp-for="FirstName" class="control-label"></label>
-                <input asp-for="FirstName" class="form-control" />
-                <span asp-validation-for="FirstName" class="text-danger"></span>
+                <label asp-for="Time" class="control-label"></label>
+                <input asp-for="Time" class="form-control" />
+                <span asp-validation-for="Time" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="LastName" class="control-label"></label>
-                <input asp-for="LastName" class="form-control" />
-                <span asp-validation-for="LastName" class="text-danger"></span>
+                <label asp-for="InterviewerID" class="control-label"></label>
+                <select asp-for="InterviewerID" class ="form-control" asp-items="ViewBag.interviewerInfo"></select>
             </div>
             <div class="form-group">
                 <input type="submit" value="Create" class="btn btn-primary" />

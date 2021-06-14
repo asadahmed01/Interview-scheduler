@@ -14,7 +14,7 @@ using Microsoft.AspNetCore.Authentication.Cookies;
 
 namespace AppointmentBooking.Controllers
 {
-    
+
     public class InterviewerModelsController : Controller
     {
         private readonly AppointmentDbContext _context;
@@ -42,13 +42,13 @@ namespace AppointmentBooking.Controllers
         public async Task<IActionResult> ValidateAdmin(string username, string password, string returnUrl)
         {
             ViewData["ReturnUrl"] = returnUrl;
-            if(username =="admin" && password == "pizza")
+            if (username == "admin" && password == "pizza")
             {
                 var claims = new List<Claim>();
                 claims.Add(new Claim("username", username));
                 claims.Add(new Claim(ClaimTypes.NameIdentifier, username));
                 claims.Add(new Claim(ClaimTypes.Name, username));
-               
+
                 var claimsIdentity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
                 var claimsPrincipal = new ClaimsPrincipal(claimsIdentity);
                 await HttpContext.SignInAsync(claimsPrincipal);
@@ -67,7 +67,7 @@ namespace AppointmentBooking.Controllers
 
         //logout user
         [Authorize]
-        public async Task<IActionResult> Logout ()
+        public async Task<IActionResult> Logout()
         {
             await HttpContext.SignOutAsync();
             return Redirect("/");

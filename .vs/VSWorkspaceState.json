@@ -1,7 +1,9 @@
 {
   "ExpandedNodes": [
     "",
-    "\\AppointmentBooking"
+    "\\AppointmentBooking",
+    "\\AppointmentBooking\\Views",
+    "\\AppointmentBooking\\Views\\Shared"
   ],
   "SelectedNode": "\\AppointmentBooking.sln",
   "PreviewInSolutionExplorer": false

@@ -1,25 +1,38 @@
 ﻿@{
-    ViewData["Title"] = "Home Page";
+  ViewData["Title"] = "Home Page";
 }
+
 
 <div class="jumbotron jumbotron-fluid">
   <div class="container">
     <h1 class="display-4">Hello, Welcome to The Scheduler.</h1>
     <p class="lead">Book, Manage and Monitor Your Appointments with few Clicks and Clearity.</p>
 
-    <hr class="my-4">
-  <p>It uses utility classes for typography and spacing to space content out within the larger container.</p>
-  <div class="text-center">
-      <p class="lead">
-    
 
-    <a class="btn btn-primary btn-lg" asp-area="" asp-controller="BookedAppointments" asp-action="Create">Start Booking</a>
-
-  </p>
-
-  
-  </div>
-  
   </div>
 
+</div>
+
+</div>
+
+<div class="md:flex h-full mr-1 ml-1 md:p-5 p-2">
+  <div class="flex-1 tracking-wide">
+    <h1 class="font-semibold text-3xl">A simple Appointments Manager</h1>
+    <br>
+    <p class="text-gray-400">A clean and simple Interface for managing your appointments for your small business.</p>
+    <p class="text-gray-400">Organize all your schedule needs with easy to use dashboard.</p>
+    <p class="text-gray-400">Book Your Appointment Now.</p>
+    <br>
+    <div class="mx-auto text-center mt-40">
+      <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded text-2xl mb-4">
+        <a asp-area="" asp-controller="BookedAppointments" asp-action="Create">Book Now</a>
+
+      </button>
+
+    </div>
+
+  </div>
+  <div class="flex-1">
+    <img class="md:w-full h-full" src="~/images/landing-calender.svg" alt="">
+  </div>
 </div>

@@ -8,20 +8,25 @@ using System.Threading.Tasks;
 
 namespace AppointmentBooking.Models
 {
-    public class BookedAppointment
-    {
-        [Key]
-        [DatabaseGenerated(DatabaseGeneratedOption
-        .Identity)]
+  public class BookedAppointment
+  {
+    [Key]
+    [DatabaseGenerated(DatabaseGeneratedOption
+    .Identity)]
 
-        public int ID { get; set; }
-        [DisplayName("First Name")]
-        public string FirstName { get; set; }
-        [DisplayName("Last Name")]
-        public string LastName { get; set; }
-        public DateTime TimeSlot { get; set; }
+    public int ID { get; set; }
+    [DisplayName("First Name")]
+    public string FirstName { get; set; }
+    [DisplayName("Last Name")]
+    public string LastName { get; set; }
+    [DisplayName("Date & Time")]
+    public string Dates { get; set; }
 
-        public int InterviewerID { get; set; }
-        public virtual InterviewerModel Interviewer { get; set; }
-    }
+    [DisplayName("Interviewer Name")]
+    public int InterviewerID { get; set; }
+    public virtual InterviewerModel Interviewer { get; set; }
+
+
+
+  }
 }

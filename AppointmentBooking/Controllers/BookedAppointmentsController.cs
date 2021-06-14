@@ -13,7 +13,6 @@ namespace AppointmentBooking.Controllers
     public class BookedAppointmentsController : Controller
     {
         private readonly AppointmentDbContext _context;
-        //public List<SelectListItem> Options { get; set; }
 
         public BookedAppointmentsController(AppointmentDbContext context)
         {
@@ -49,13 +48,20 @@ namespace AppointmentBooking.Controllers
         // GET: BookedAppointments/Create
         public IActionResult Create()
         {
-         
             var options = _context.Interviewer.Select(a =>
-                                  new SelectListItem
-                                  {
-                                      Value = a.ID.ToString(),
-                                      Text = a.FirstName + " " + a.LastName
-                                  }).ToList();
+            new SelectListItem
+            {
+                Value = a.ID.ToString(),
+                Text = a.FirstName + " " + a.LastName
+            }).ToList();
+
+            var times = _context.AvailableTimes.Select(a =>
+            new SelectListItem
+            {
+                
+                Text = a.Time.ToString("dddd, dd MMMM yyyy  HH:mm:ss")
+            }).ToList();
+
             options.Insert(0, new SelectListItem()
             {
                 Text = "----Select----",
@@ -63,8 +69,8 @@ namespace AppointmentBooking.Controllers
             });
             //ViewData["InterviewerID"] = new SelectList(_context.Interviewer, "ID", "ID");
             ViewData["test"] = options;
+            ViewData["times"] = times;
 
-            
             return View();
         }
 
@@ -73,18 +79,15 @@ namespace AppointmentBooking.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("ID,FirstName,LastName,TimeSlot,InterviewerID, Interviewer")] BookedAppointment bookedAppointment)
+        public async Task<IActionResult> Create([Bind("ID,FirstName,LastName,Dates,InterviewerID")] BookedAppointment bookedAppointment)
         {
             if (ModelState.IsValid)
             {
                 _context.Add(bookedAppointment);
                 await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Details), new { ID = bookedAppointment.ID});
+                return RedirectToAction(nameof(Index));
             }
-
-            
             ViewData["InterviewerID"] = new SelectList(_context.Interviewer, "ID", "ID", bookedAppointment.InterviewerID);
-
             return View(bookedAppointment);
         }
 
@@ -102,6 +105,25 @@ namespace AppointmentBooking.Controllers
                 return NotFound();
             }
             ViewData["InterviewerID"] = new SelectList(_context.Interviewer, "ID", "ID", bookedAppointment.InterviewerID);
+
+            var options = _context.Interviewer.Select(a =>
+            new SelectListItem
+            {
+                Value = a.ID.ToString(),
+                Text = a.FirstName + " " + a.LastName
+            }).ToList();
+
+            var times = _context.AvailableTimes.Select(a =>
+            new SelectListItem
+            {
+                Value = a.ID.ToString(),
+                Text = a.Time.ToString("dddd, dd MMMM yyyy  HH:mm:ss")
+            }).ToList();
+
+            ViewData["options"] = options;
+            ViewData["times"] = times;
+
+            
             return View(bookedAppointment);
         }
 
@@ -110,7 +132,7 @@ namespace AppointmentBooking.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("ID,FirstName,LastName,TimeSlot,InterviewerID")] BookedAppointment bookedAppointment)
+        public async Task<IActionResult> Edit(int id, [Bind("ID,FirstName,LastName,Dates,InterviewerID")] BookedAppointment bookedAppointment)
         {
             if (id != bookedAppointment.ID)
             {
@@ -138,7 +160,10 @@ namespace AppointmentBooking.Controllers
                 return RedirectToAction(nameof(Index));
             }
             ViewData["InterviewerID"] = new SelectList(_context.Interviewer, "ID", "ID", bookedAppointment.InterviewerID);
+
             return View(bookedAppointment);
+
+
         }
 
         // GET: BookedAppointments/Delete/5

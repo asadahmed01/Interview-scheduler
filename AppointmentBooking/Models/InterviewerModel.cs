@@ -18,9 +18,9 @@ namespace AppointmentBooking.Models
         public string FirstName { get; set; }
         [DisplayName("Last Name")]
         public string LastName { get; set; }
-        [DisplayName("Slots Remaining")]
-        public int NumberOfSlots { get; set; }
-
+        
+       
+        public virtual ICollection<AvailableTimes> AvailableSlots { get; set; }
         public virtual ICollection<BookedAppointment> AppointmentList { get; set; }
     }
 

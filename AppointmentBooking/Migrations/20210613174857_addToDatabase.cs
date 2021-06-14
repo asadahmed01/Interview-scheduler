@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace AppointmentBooking.Migrations
 {
-    public partial class addItemsToDatabase : Migration
+    public partial class addToDatabase : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -14,8 +14,7 @@ namespace AppointmentBooking.Migrations
                     ID = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     FirstName = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    LastName = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    NumberOfSlots = table.Column<int>(type: "int", nullable: false)
+                    LastName = table.Column<string>(type: "nvarchar(max)", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -30,7 +29,7 @@ namespace AppointmentBooking.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     FirstName = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     LastName = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    TimeSlot = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    Dates = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     InterviewerID = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
@@ -44,9 +43,34 @@ namespace AppointmentBooking.Migrations
                         onDelete: ReferentialAction.Cascade);
                 });
 
+            migrationBuilder.CreateTable(
+                name: "AvailableTimes",
+                columns: table => new
+                {
+                    ID = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Time = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    InterviewerID = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_AvailableTimes", x => x.ID);
+                    table.ForeignKey(
+                        name: "FK_AvailableTimes_Interviewer_InterviewerID",
+                        column: x => x.InterviewerID,
+                        principalTable: "Interviewer",
+                        principalColumn: "ID",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
             migrationBuilder.CreateIndex(
                 name: "IX_Appointment_InterviewerID",
                 table: "Appointment",
+                column: "InterviewerID");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_AvailableTimes_InterviewerID",
+                table: "AvailableTimes",
                 column: "InterviewerID");
         }
 
@@ -54,6 +78,9 @@ namespace AppointmentBooking.Migrations
         {
             migrationBuilder.DropTable(
                 name: "Appointment");
+
+            migrationBuilder.DropTable(
+                name: "AvailableTimes");
 
             migrationBuilder.DropTable(
                 name: "Interviewer");

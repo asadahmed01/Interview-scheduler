@@ -19,16 +19,11 @@
                 @Html.DisplayNameFor(model => model.LastName)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.TimeSlot)
+                @Html.DisplayNameFor(model => model.Dates)
             </th>
-            <th>
-                @Html.DisplayNameFor(model => model.InterviewerID)
-            </th>
-
             <th>
                 @Html.DisplayNameFor(model => model.Interviewer)
             </th>
-
             <th></th>
         </tr>
     </thead>
@@ -42,17 +37,12 @@
                 @Html.DisplayFor(modelItem => item.LastName)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.TimeSlot)
+                @Html.DisplayFor(modelItem => item.Dates)
             </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Interviewer.ID)
-            </td>
-
             <td>
                 @Html.DisplayFor(modelItem => item.Interviewer.FirstName)
                 @Html.DisplayFor(modelItem => item.Interviewer.LastName)
             </td>
-
             <td>
                 <a asp-action="Edit" asp-route-id="@item.ID">Edit</a> |
                 <a asp-action="Details" asp-route-id="@item.ID">Details</a> |

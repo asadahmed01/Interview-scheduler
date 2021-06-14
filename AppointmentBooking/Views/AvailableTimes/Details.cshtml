@@ -1,4 +1,4 @@
-﻿@model AppointmentBooking.Models.InterviewerModel
+﻿@model AppointmentBooking.Models.AvailableTimes
 
 @{
     ViewData["Title"] = "Details";
@@ -7,20 +7,21 @@
 <h1>Details</h1>
 
 <div>
-    <h4>InterviewerModel</h4>
+    <h4>AvailableTimes</h4>
     <hr />
     <dl class="row">
         <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.FirstName)
+            @Html.DisplayNameFor(model => model.Time)
         </dt>
         <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.FirstName)
+            @Html.DisplayFor(model => model.Time)
         </dd>
         <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.LastName)
+            @Html.DisplayNameFor(model => model.Interviewer)
         </dt>
         <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.LastName)
+            @Html.DisplayFor(model => model.Interviewer.FirstName)
+            @Html.DisplayFor(model => model.Interviewer.LastName)
         </dd>
     </dl>
 </div>

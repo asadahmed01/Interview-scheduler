@@ -19,12 +19,35 @@ namespace AppointmentBooking.Migrations
                 .HasAnnotation("ProductVersion", "5.0.6")
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+            modelBuilder.Entity("AppointmentBooking.Models.AvailableTimes", b =>
+                {
+                    b.Property<int>("ID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int>("InterviewerID")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("Time")
+                        .HasColumnType("datetime2");
+
+                    b.HasKey("ID");
+
+                    b.HasIndex("InterviewerID");
+
+                    b.ToTable("AvailableTimes");
+                });
+
             modelBuilder.Entity("AppointmentBooking.Models.BookedAppointment", b =>
                 {
                     b.Property<int>("ID")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Dates")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("FirstName")
                         .HasColumnType("nvarchar(max)");
@@ -34,9 +57,6 @@ namespace AppointmentBooking.Migrations
 
                     b.Property<string>("LastName")
                         .HasColumnType("nvarchar(max)");
-
-                    b.Property<DateTime>("TimeSlot")
-                        .HasColumnType("datetime2");
 
                     b.HasKey("ID");
 
@@ -58,12 +78,20 @@ namespace AppointmentBooking.Migrations
                     b.Property<string>("LastName")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("NumberOfSlots")
-                        .HasColumnType("int");
-
                     b.HasKey("ID");
 
                     b.ToTable("Interviewer");
+                });
+
+            modelBuilder.Entity("AppointmentBooking.Models.AvailableTimes", b =>
+                {
+                    b.HasOne("AppointmentBooking.Models.InterviewerModel", "Interviewer")
+                        .WithMany("AvailableSlots")
+                        .HasForeignKey("InterviewerID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Interviewer");
                 });
 
             modelBuilder.Entity("AppointmentBooking.Models.BookedAppointment", b =>
@@ -80,6 +108,8 @@ namespace AppointmentBooking.Migrations
             modelBuilder.Entity("AppointmentBooking.Models.InterviewerModel", b =>
                 {
                     b.Navigation("AppointmentList");
+
+                    b.Navigation("AvailableSlots");
                 });
 #pragma warning restore 612, 618
         }
