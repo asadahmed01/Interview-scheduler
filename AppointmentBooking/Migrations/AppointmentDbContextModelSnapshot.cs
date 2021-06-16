@@ -49,6 +49,9 @@ namespace AppointmentBooking.Migrations
                     b.Property<string>("Dates")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("Email")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("FirstName")
                         .HasColumnType("nvarchar(max)");
 

@@ -46,12 +46,15 @@ namespace AppointmentBooking.Controllers
       {
         return NotFound();
       }
-            emailServie.SendMail("asad.awaare@gmail.com", "asad.awaare@gmail.com", "Test", "<h1>Example HTML Message Body</h1>");
+            var body = $"<h1>Hi, {bookedAppointment.FirstName}</h1> <br> <div> <p>This is comfirmation for your appointmnet on {bookedAppointment.Dates} with {bookedAppointment.Interviewer.FirstName} {bookedAppointment.Interviewer.LastName}</p> <p>See you soon !</p> </div>";
+            //send Email
+            emailServie.SendMail("asad.awaare@gmail.com", bookedAppointment.Email, "Comfirmation", body);
+
       return View(bookedAppointment);
     }
 
 
-        //send Email
+        
     
 
     // GET: BookedAppointments/Create
@@ -88,7 +91,7 @@ namespace AppointmentBooking.Controllers
     // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
     [HttpPost]
     [ValidateAntiForgeryToken]
-    public async Task<IActionResult> Create([Bind("ID,FirstName,LastName,Dates,InterviewerID")] BookedAppointment bookedAppointment)
+    public async Task<IActionResult> Create([Bind("ID,FirstName,LastName,Dates, Email,InterviewerID")] BookedAppointment bookedAppointment)
     {
       if (ModelState.IsValid)
       {
@@ -141,7 +144,7 @@ namespace AppointmentBooking.Controllers
     // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
     [HttpPost]
     [ValidateAntiForgeryToken]
-    public async Task<IActionResult> Edit(int id, [Bind("ID,FirstName,LastName,Dates,InterviewerID")] BookedAppointment bookedAppointment)
+    public async Task<IActionResult> Edit(int id, [Bind("ID,FirstName,LastName,Dates, Email,InterviewerID")] BookedAppointment bookedAppointment)
     {
       if (id != bookedAppointment.ID)
       {

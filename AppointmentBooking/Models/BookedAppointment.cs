@@ -22,8 +22,8 @@ namespace AppointmentBooking.Models
     [DisplayName("Date & Time")]
     public string Dates { get; set; }
 
-    // [DisplayName("Email Address")]
-    // public string Email { get; set; }
+    [DisplayName("Email Address")]
+    public string Email { get; set; }
 
 
     [DisplayName("Interviewer Name")]
