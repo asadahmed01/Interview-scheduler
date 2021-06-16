@@ -3,12 +3,27 @@
 @{
     ViewData["Title"] = "Index";
 }
+<h1 class="text-3xl text-blue-600 font-semibold my-5">Welcome to the Admin Dashboard</h1>
 
-<h1>Index</h1>
+
+<div class="grid md:grid-flow-col grid-flow-row gap-10 md:gap-20 text-3xl text-white my-4">
+    <div class="bg-green-500 text-center py-5 rounded-xl">
+        <button>Interviewers</button>
+    </div>
+    <div class="bg-blue-400 text-center py-5 rounded-xl">
+        <button>Appointments</button>
+    </div>
+    <div class="bg-red-400 text-center py-5 rounded-xl">
+        <button>Time Slots</button>
+    </div>
+</div>
+
 
 <p>
     <a asp-action="Create">Create New</a>
 </p>
+
+<h1>Booked Appointments</h1>
 <table class="table">
     <thead>
         <tr>
@@ -22,20 +37,21 @@
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.FirstName)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.LastName)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.ID">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.ID">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.ID">Delete</a>
-            </td>
-        </tr>
-}
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.FirstName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.LastName)
+                </td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@item.ID">Edit</a> |
+                    <a asp-action="Details" asp-route-id="@item.ID">Details</a> |
+                    <a asp-action="Delete" asp-route-id="@item.ID">Delete</a>
+                </td>
+            </tr>
+        }
     </tbody>
 </table>
