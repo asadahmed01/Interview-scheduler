@@ -7,6 +7,10 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using AppointmentBooking.Data;
 using AppointmentBooking.Models;
+using MailKit.Net.Smtp;
+using MimeKit;
+using MimeKit.Text;
+using MailKit.Security;
 
 namespace AppointmentBooking.Controllers
 {
@@ -29,6 +33,7 @@ namespace AppointmentBooking.Controllers
     // GET: BookedAppointments/Details/5
     public async Task<IActionResult> Details(int? id)
     {
+            var emailServie = new EmailServices();
       if (id == null)
       {
         return NotFound();
@@ -41,9 +46,13 @@ namespace AppointmentBooking.Controllers
       {
         return NotFound();
       }
-
+            emailServie.SendMail("asad.awaare@gmail.com", "asad.awaare@gmail.com", "Test", "<h1>Example HTML Message Body</h1>");
       return View(bookedAppointment);
     }
+
+
+        //send Email
+    
 
     // GET: BookedAppointments/Create
     public IActionResult Create()

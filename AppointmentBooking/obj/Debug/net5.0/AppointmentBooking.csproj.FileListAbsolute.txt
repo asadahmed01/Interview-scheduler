@@ -445,3 +445,6 @@ C:\Users\asada\Desktop\AppointmentBooking\AppointmentBooking\obj\Debug\net5.0\Ra
 C:\Users\asada\Desktop\AppointmentBooking\AppointmentBooking\obj\Debug\net5.0\Razor\Views\BookedAppointments\Details.cshtml.g.cs
 C:\Users\asada\Desktop\AppointmentBooking\AppointmentBooking\obj\Debug\net5.0\Razor\Views\BookedAppointments\Edit.cshtml.g.cs
 C:\Users\asada\Desktop\AppointmentBooking\AppointmentBooking\obj\Debug\net5.0\Razor\Views\BookedAppointments\Index.cshtml.g.cs
+C:\Users\asada\Desktop\AppointmentBooking\AppointmentBooking\bin\Debug\net5.0\MailKit.dll
+C:\Users\asada\Desktop\AppointmentBooking\AppointmentBooking\bin\Debug\net5.0\MimeKit.dll
+C:\Users\asada\Desktop\AppointmentBooking\AppointmentBooking\bin\Debug\net5.0\BouncyCastle.Crypto.dll

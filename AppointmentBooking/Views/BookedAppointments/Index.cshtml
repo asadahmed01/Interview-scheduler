@@ -4,52 +4,54 @@
     ViewData["Title"] = "Index";
 }
 
-<h1>Index</h1>
+<h1>Booked Appointments</h1>
 
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.FirstName)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.LastName)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Dates)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Interviewer)
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var item in Model)
-        {
+
+<div class="h-screen mt-20">
+
+
+    <table class="table table-striped">
+        <thead class="thead-dark">
             <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.FirstName)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.LastName)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Dates)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Interviewer.FirstName)
-                    @Html.DisplayFor(modelItem => item.Interviewer.LastName)
-                </td>
-                <td>
-                    <a asp-action="Edit" asp-route-id="@item.ID">Edit</a> |
-                    <a asp-action="Details" asp-route-id="@item.ID">Details</a> |
-                    <a asp-action="Delete" asp-route-id="@item.ID">Delete</a>
-                </td>
+                <th>
+                    @Html.DisplayNameFor(model => model.FirstName)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.LastName)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Dates)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Interviewer)
+                </th>
+                <th></th>
             </tr>
-        }
-    </tbody>
-</table>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.FirstName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.LastName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Dates)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Interviewer.FirstName)
+                        @Html.DisplayFor(modelItem => item.Interviewer.LastName)
+                    </td>
+                    <td>
+                        <a asp-action="Edit" asp-route-id="@item.ID" class="text-blue-400">Edit</a> |
+                        <a asp-action="Details" asp-route-id="@item.ID">Details</a> |
+                        <a asp-action="Delete" asp-route-id="@item.ID" class="text-red-600">Delete</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
